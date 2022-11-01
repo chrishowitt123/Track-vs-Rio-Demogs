@@ -122,3 +122,13 @@ df_res = df_res[['System',
 df_res.sort_values(by=['Score', 'URN'], ascending=(False, True), inplace=True)
 
 df_res.to_excel('ratio_test.xlsx', index=False)
+
+# number of Track rows
+num_trak_rows = len(df_res[df_res['System'] == 'TRAK'])
+print(f"Number of Track Rows: {num_trak_rows}")
+
+# number of RIO rows
+num_rio_rows = len(df_res[df_res['System'] == 'RIO'])
+print(f"Number of RIO Rows:   {num_rio_rows}")
+
+print(f'Difference: {num_rio_rows - num_trak_rows }')
