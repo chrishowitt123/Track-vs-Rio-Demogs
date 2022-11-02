@@ -50,13 +50,22 @@ merged_dfs = pd.concat([trak_full, rio_full], ignore_index=True, axis=0)
 # remove unwanted address columns that were joined previously
 merged_dfs.drop(['Address1', 'Address2', 'PostCode','Address3','Address4' ], axis=1, inplace=True)
 
-# separate records that appear in both Trak and Rio with those that don't
+# identify unmerged records in Rio
+duplicate_urns_in_rio = rio_full[rio_full['URN'].map(rio_full['URN'].value_counts()) > 1]
+
+# records in Trak and Rio
 urns_in_trak_and_rio = merged_dfs[merged_dfs['URN'].map(merged_dfs['URN'].value_counts()) > 1]
+
+# other records
 not_urns_in_trak_and_rio = merged_dfs[merged_dfs['URN'].map(merged_dfs['URN'].value_counts()) == 1]
 
-# group rows by URN  and convert to a nestled list
+# urns in Trak and Rio minus Rio unmrged records 
+rio_unmerged_urns = list(set(duplicate_urns_in_rio['URN'].tolist()))
+urns_in_trak_and_rio_minus_rio_unmerged = urns_in_trak_and_rio[~urns_in_trak_and_rio['URN'].isin(rio_unmerged_urns)]
+
+# group rows by URN and convert to a nestled list
 master_list = []
-for group_name, group in urns_in_trak_and_rio.groupby('URN'):
+for group_name, group in urns_in_trak_and_rio_minus_rio_unmerged.groupby('URN'):
     group_list = group.values.tolist() 
     master_list.append(group_list)   
 
