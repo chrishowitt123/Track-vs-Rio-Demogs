@@ -138,7 +138,9 @@ df_res = df_res[['System',
 df_res.sort_values(by=['Score', 'URN'], ascending=(False, True), inplace=True)
 
 # export
-df_res.to_excel('ratio_test.xlsx', index=False)
+df_res.to_excel('records_both_in_trak_and_rio_minus_unmerged_in_rio.xlsx', index=False)
+duplicate_urns_in_rio.to_excel('duplicate_urns_in_rio.xlsx', index=False)
+urns_in_one_but_not_other.to_excel('urns_in_one_but_not_other.xlsx', index=False)
 
 # reporting
 # number of Trak rows
