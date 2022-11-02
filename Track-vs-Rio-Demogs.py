@@ -151,3 +151,13 @@ print(f"Number of Track Rows: {num_trak_rows}")
 num_rio_rows = len(df_res[df_res['System'] == 'RIO'])
 print(f"Number of RIO Rows:   {num_rio_rows}")
 print(f'Difference: {num_rio_rows - num_trak_rows }')
+print('\n')
+number_of_exact_matches = len(df_res[df_res["Score"] == 100])
+print(f'Number of exact matches: {number_of_exact_matches}')
+
+# get current date and time
+dt = datetime.now()
+
+# append nnumber of exact matches to txt file 
+with open('audit.txt', 'a') as f:
+    f.write(f'{dt}: {number_of_exact_matches} exact matches\n')
