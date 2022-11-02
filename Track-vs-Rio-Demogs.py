@@ -60,13 +60,6 @@ master_list = []
 for group_name, group in urns_in_trak_and_rio.groupby('URN'):
     group_list = group.values.tolist() 
     master_list.append(group_list)   
-    
-    # # define new columns
-# cols = urns_in_trak_and_rio.columns.tolist()
-# cols.append('Ratio')
-
-# create new dataframe to hold results
-df_results = pd.DataFrame(columns = cols)
 
 # separate the string to perform fuzzy matching on and create nestled list
 address_pairs = [] 
