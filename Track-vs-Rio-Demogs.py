@@ -54,9 +54,8 @@ merged_dfs.drop(['Address1', 'Address2', 'PostCode','Address3','Address4' ], axi
 urns_in_trak_and_rio = merged_dfs[merged_dfs['URN'].map(merged_dfs['URN'].value_counts()) > 1]
 not_urns_in_trak_and_rio = merged_dfs[merged_dfs['URN'].map(merged_dfs['URN'].value_counts()) == 1]
 
-master_list = []
-
 # group rows by URN  and convert to a nestled list
+master_list = []
 for group_name, group in urns_in_trak_and_rio.groupby('URN'):
     group_list = group.values.tolist() 
     master_list.append(group_list)   
